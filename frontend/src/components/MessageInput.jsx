@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { IoSend } from 'react-icons/io5'; // Import the send icon
-import './MessageInput.css'; // Create this new CSS file
+import { IoSend } from 'react-icons/io5'; 
+import './MessageInput.css'; 
 
 const MessageInput = ({ onSendMessage, onTyping }) => {
   const [text, setText] = useState('');

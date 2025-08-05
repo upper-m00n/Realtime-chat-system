@@ -1,25 +1,21 @@
-/* ======================================= */
-/* === Online Users List Sidebar Styling === */
-/* ======================================= */
 
-/* The main container for the sidebar */
 .online-users-list {
-  background-color: #f7f7f7; /* A slightly off-white for contrast */
+  background-color: #f7f7f7; 
   border-right: 1px solid #e0e0e0;
-  flex: 0 0 280px; /* Fixed width: Does not grow or shrink */
+  flex: 0 0 280px; 
   display: flex;
   flex-direction: column;
   overflow-y: auto;
 }
 
-/* Header section of the sidebar */
+
 .online-users-header {
   padding: 18px 20px;
   border-bottom: 1px solid #e0e0e0;
   display: flex;
   align-items: center;
-  gap: 8px; /* Space between header items */
-  flex-shrink: 0; /* Prevents the header from shrinking */
+  gap: 8px; 
+  flex-shrink: 0; 
 }
 
 .online-users-header h3 {
@@ -27,14 +23,14 @@
   font-size: 1.1rem;
   font-weight: 600;
   color: #333;
-  flex-grow: 1; /* Pushes other items to the right */
+  flex-grow: 1; 
 }
 
-/* The green "live" dot */
+
 .status-indicator {
   height: 9px;
   width: 9px;
-  background-color: #25d366; /* A vibrant green */
+  background-color: #25d366; 
   border-radius: 50%;
   display: inline-block;
 }
@@ -45,15 +41,14 @@
   font-weight: 500;
 }
 
-/* The list of users */
 .online-users-list ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  flex-grow: 1; /* Allows the list to take up remaining space */
+  flex-grow: 1; 
 }
 
-/* Individual user item in the list */
+
 .online-users-list li {
   display: flex;
   align-items: center;
@@ -63,18 +58,17 @@
   border-bottom: 1px solid #f0f0f0;
 }
 
-/* Hover effect for each user */
+
 .online-users-list li:hover {
   background-color: #e9e9e9;
 }
 
-/* The user icon from react-icons */
 .user-icon {
   color: #888;
-  margin-right: 15px; /* Space between icon and name */
+  margin-right: 15px; 
 }
 
-/* The username text */
+
 .username-text {
   font-size: 1rem;
   color: #222;

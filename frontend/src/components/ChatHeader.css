@@ -2,9 +2,9 @@
   display: flex;
   align-items: center;
   padding: 10px 16px;
-  background-color: #075E54; /* WhatsApp Green */
+  background-color: #075E54; 
   color: white;
-  flex-shrink: 0; /* Prevents the header from shrinking */
+  flex-shrink: 0; 
 }
 
 .group-icon {
@@ -24,7 +24,7 @@
   transition: 1s;
   border-width: 0;
   margin-left: 10px;
-  
+  align-self: flex-end;
 }
 
 .header-info button:hover{
@@ -36,6 +36,7 @@
   margin: 0;
   font-weight: 500;
   font-size: 1.1rem;
+  color: black;
 }
 
 .online-status {

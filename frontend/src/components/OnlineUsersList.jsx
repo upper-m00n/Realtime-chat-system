@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaUserCircle } from 'react-icons/fa'; // Import a user icon
+import { FaUserCircle } from 'react-icons/fa'; 
 import './ChatPage.css'
 const OnlineUsersList = ({ users, room }) => {
   return (

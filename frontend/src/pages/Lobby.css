@@ -66,7 +66,6 @@
   box-shadow: 0 0 0 3px rgba(7, 94, 84, 0.1);
 }
 
-/* Unified button style */
 .lobby-container button {
   padding: 14px 24px;
   border: none;
@@ -76,7 +75,7 @@
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
-  white-space: nowrap; /* Prevents text like "Join Room" from wrapping */
+  white-space: nowrap; 
   transition: background-color 0.3s, transform 0.1s;
 }
 
@@ -94,7 +93,7 @@
   transform: none;
 }
 
-/* Styled divider instead of <hr> */
+
 .divider {
   height: 1px;
   width: 100%;
@@ -102,7 +101,7 @@
   margin: 35px 0;
 }
 
-/* Feedback message styles */
+
 .message {
   margin-top: 15px;
   padding: 10px;

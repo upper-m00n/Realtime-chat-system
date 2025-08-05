@@ -1,25 +1,49 @@
 .message-input-form {
   display: flex;
   align-items: center;
-  padding: 5px 0;
+  padding: 8px 12px; 
 }
+
+.attachment-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: #54656f; 
+  margin-right: 8px;
+}
+
+.attachment-button:hover {
+  color: #128C7E;
+}
+
 
 .message-input {
   flex-grow: 1;
   border: 1px solid #ccc;
   border-radius: 20px;
-  padding: 10px 15px;
+  padding: 10px 18px; 
   font-size: 1rem;
   margin-right: 10px;
+  background-color: #fff;
+  transition: border-color 0.3s, box-shadow 0.3s; 
+}
+
+
+.message-input::placeholder {
+  color: #999;
+  opacity: 1; 
 }
 
 .message-input:focus {
   outline: none;
   border-color: #075E54;
+
+  box-shadow: 0 0 0 3px rgba(7, 94, 84, 0.1);
 }
 
 .send-button {
-  background-color: #128C7E; /* WhatsApp secondary green */
+  background-color: #128C7E;
   color: white;
   border: none;
   border-radius: 50%;
@@ -29,9 +53,41 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background-color 0.2s;
+  flex-shrink: 0; 
+  transition: background-color 0.2s, transform 0.1s; 
 }
 
 .send-button:hover {
   background-color: #075E54;
+  transform: scale(1.1);
+}
+
+
+.send-button:active {
+    transform: scale(1.0);
+}
+
+@media (max-width: 480px) {
+  .message-input-form {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .message-input {
+    margin-right: 0;
+    width: 100%;
+  }
+
+  .send-button {
+    align-self: flex-end;
+  }
+
+  .online-users-list li {
+    padding: 12px 16px;
+  }
+
+  .chat-window {
+    min-height: 400px;
+  }
 }

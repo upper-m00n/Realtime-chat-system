@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './Lobby.css'; // Make sure this CSS file is imported
+import './Lobby.css'; 
 
-const API_URL = 'http://localhost:5000'; // Or your deployed backend URL
+const API_URL = 'http://localhost:5000'; //  backend URL
 
 function Lobby({ user, onJoinRoom }) {
   const [rooms, setRooms] = useState([]);
   const [selectedRoom, setSelectedRoom] = useState('');
   const [newRoomName, setNewRoomName] = useState('');
   
-  // New state for UI feedback
+  // state for UI feedback
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState({ text: '', type: '' });
 
@@ -35,8 +35,9 @@ function Lobby({ user, onJoinRoom }) {
     e.preventDefault();
     if (!newRoomName.trim()) return;
     
-    setIsLoading(true); // Start loading
-    setMessage({ text: '', type: '' }); // Clear previous messages
+    setIsLoading(true); 
+
+    setMessage({ text: '', type: '' }); 
 
     try {
       const response = await axios.post(`${API_URL}/api/rooms`, { roomName: newRoomName });
@@ -50,7 +51,7 @@ function Lobby({ user, onJoinRoom }) {
       setMessage({ text: errorMsg, type: 'error' });
       console.error('Failed to create room:', errorMsg);
     } finally {
-      setIsLoading(false); // Stop loading regardless of outcome
+      setIsLoading(false); 
     }
   };
 

@@ -2,6 +2,9 @@ import React from 'react';
 import './ChatHeader.css';
 import { useNavigate } from 'react-router-dom';
 
+
+//chatbox header
+
 const ChatHeader = ({ room, onlineCount }) => {
   const navigate=useNavigate();
   const handleExitRoom =()=>{

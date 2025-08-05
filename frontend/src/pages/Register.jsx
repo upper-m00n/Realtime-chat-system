@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 
-const API_URL = 'http://localhost:5000'; // Or your deployed backend URL
+const API_URL = 'http://localhost:5000'; // backend URL
 
 function Register() {
   const [username, setUsername] = useState('');
@@ -14,7 +14,7 @@ function Register() {
     e.preventDefault();
     try {
       await axios.post(`${API_URL}/api/auth/register`, { username, password });
-      navigate('/login'); // Redirect to login page on successful registration
+      navigate('/login'); 
     } catch (err) {
       setError(err.response?.data?.msg || 'Registration failed.');
     }
