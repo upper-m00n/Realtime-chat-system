@@ -1,6 +1,6 @@
-// controllers/room.controller.js
 const Room = require('../models/room.model');
 
+// get rooms
 exports.getAllRooms = async (req, res) => {
   try {
     const rooms = await Room.find().sort({ timestamp: -1 });
@@ -10,6 +10,7 @@ exports.getAllRooms = async (req, res) => {
   }
 };
 
+// create room
 exports.createRoom = async (req, res) => {
   try {
     const { roomName } = req.body;

@@ -1,7 +1,8 @@
-// controllers/auth.controller.js
 const bcrypt = require('bcryptjs');
 const User = require('../models/User.model');
 
+
+// register
 exports.registerUser = async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -24,6 +25,8 @@ exports.registerUser = async (req, res) => {
   }
 };
 
+
+// login
 exports.loginUser = async (req, res) => {
   try {
     const { username, password } = req.body;

@@ -1,9 +1,10 @@
-// services/socket.service.js
+
 const Message = require('../models/message.model');
 
-const onlineUsers = {};      // { roomName: ['user1', 'user2'] }
-const socketUserMap = {};    // { socket.id: { username, room } }
+const onlineUsers = {};      
+const socketUserMap = {};    
 
+// initialize 
 const initializeSocket = (io) => {
   io.on('connection', (socket) => {
     console.log(`User connected: ${socket.id}`);
