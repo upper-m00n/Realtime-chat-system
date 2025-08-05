@@ -1,48 +1,39 @@
 import React, { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import io from 'socket.io-client';
-import ChatWindow from './components/ChatWindow';
-import MessageInput from './components/MessageInput';
-import OnlineUsersList from './components/OnlineUsersList';
-import './App.css'; // We'll add some basic styles here
-import TypingIndicator from './components/TypingIndicator';
+import './App.css';
 
-// Connect to the backend server
-const socket = io('http://localhost:5000'); // e.g., http://localhost:5000 or your Vercel URL
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Lobby from './pages/Lobby';
+import ChatPage from './pages/ChatPage';
+
+const API_URL = 'http://localhost:5000';
+const socket = io(API_URL);
 
 function App() {
-  const [username, setUsername] = useState('');
-  const [room, setRoom] = useState('General'); // Default room
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
+  const [room, setRoom] = useState('');
   const [messages, setMessages] = useState([]);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [typingNotification, setTypingNotification] = useState('');
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    // Listen for incoming messages
+    // Socket event listeners
     socket.on('chatMessage', (message) => {
-      setMessages((prevMessages) => [...prevMessages, message]);
-      setTypingNotification(''); // Clear typing indicator on new message
+      setMessages((prev) => [...prev, message]);
+      setTypingNotification('');
     });
-
-    // Listen for chat history
-    socket.on('chatHistory', (history) => {
-      setMessages(history);
-    });
-    
-    // Listen for online users update
-    socket.on('onlineUsers', (users) => {
-      setOnlineUsers(users);
-    });
-
-    // Listen for typing indicator
+    socket.on('chatHistory', (history) => setMessages(history));
+    socket.on('onlineUsers', (users) => setOnlineUsers(users));
     socket.on('typing', (notification) => {
       setTypingNotification(notification);
-      // Clear notification after a few seconds
       setTimeout(() => setTypingNotification(''), 3000);
     });
 
-    // Clean up listeners on component unmount
-    return () => {
+    return () => { // Cleanup listeners
       socket.off('chatMessage');
       socket.off('chatHistory');
       socket.off('onlineUsers');
@@ -50,59 +41,57 @@ function App() {
     };
   }, []);
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    if (username.trim() && room.trim()) {
-      setIsLoggedIn(true);
-      socket.emit('joinRoom', { username, room });
+  useEffect(() => {
+      // If user joins a new room, clear old messages
+      setMessages([]);
+  }, [room]);
+
+
+  const handleLoginSuccess = (loggedInUser) => {
+    setUser(loggedInUser);
+  };
+
+  const handleJoinRoom = (roomName) => {
+    if (user && roomName) {
+        setRoom(roomName);
+        socket.emit('joinRoom', { username: user.username, room: roomName });
     }
   };
 
   const handleSendMessage = (text) => {
-    if (text.trim()) {
-      socket.emit('chatMessage', { username, room, text });
+    if (text.trim() && user && room) {
+      socket.emit('chatMessage', { username: user.username, room, text });
     }
   };
 
   const handleTyping = () => {
-    socket.emit('typing', { username, room });
+    if (user && room) {
+        socket.emit('typing', { username: user.username, room });
+    }
   };
-  
-  if (!isLoggedIn) {
-    return (
-      <div className="login-container">
-        <form onSubmit={handleLogin}>
-          <h1>Join Chat</h1>
-          <input
-            type="text"
-            placeholder="Enter your username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-          <input
-            type="text"
-            placeholder="Enter room name"
-            value={room}
-            onChange={(e) => setRoom(e.target.value)}
-            required
-          />
-          <button type="submit">Join</button>
-        </form>
-      </div>
-    );
-  }
 
   return (
-    <div className="chat-container">
-      <OnlineUsersList users={onlineUsers} room={room} />
-      <div className="chat-main">
-        <ChatWindow messages={messages} username={username} />
-        <div className="chat-footer">
-          <MessageInput onSendMessage={handleSendMessage} onTyping={handleTyping} />
-          <TypingIndicator notification={typingNotification} />
-        </div>
-      </div>
+    <div className="app-container">
+      <Routes>
+        <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
+        <Route path="/register" element={<Register />} />
+        
+        <Route 
+          path="/" 
+          element={user ? <Lobby user={user} onJoinRoom={handleJoinRoom} /> : <Login onLoginSuccess={handleLoginSuccess} />} 
+        />
+        <Route 
+          path="/chat/:roomName" 
+          element={user ? <ChatPage 
+              user={user} 
+              messages={messages}
+              onlineUsers={onlineUsers}
+              typingNotification={typingNotification}
+              onSendMessage={handleSendMessage}
+              onTyping={handleTyping}
+            /> : <Login onLoginSuccess={handleLoginSuccess} />} 
+        />
+      </Routes>
     </div>
   );
 }

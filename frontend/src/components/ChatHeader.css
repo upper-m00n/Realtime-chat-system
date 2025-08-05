@@ -1,0 +1,29 @@
+.chat-header {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  background-color: #075E54; /* WhatsApp Green */
+  color: white;
+  flex-shrink: 0; /* Prevents the header from shrinking */
+}
+
+.group-icon {
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.header-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.room-name {
+  margin: 0;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.online-status {
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
