@@ -7,6 +7,7 @@ const API_URL = 'http://localhost:5000'; // Or your deployed backend URL
 function Lobby({ user, onJoinRoom }) {
   const [rooms, setRooms] = useState([]);
   const [newRoomName, setNewRoomName] = useState('');
+  const [selectedRoom,setSelectedRoom]= useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,9 +35,11 @@ function Lobby({ user, onJoinRoom }) {
     }
   };
 
-  const handleJoinRoom = (roomName) => {
-      onJoinRoom(roomName);
-      navigate(`/chat/${roomName}`);
+  const handleJoinClick = () => {
+      if(selectedRoom){
+        onJoinRoom(selectedRoom);
+        navigate(`/chat/${selectedRoom}`);
+      }
   };
 
   return (
@@ -44,12 +47,27 @@ function Lobby({ user, onJoinRoom }) {
       <h2>Welcome, {user.username}!</h2>
       <h3>Join a Room</h3>
       <div className="room-list">
+  {/* The dropdown correctly updates the 'selectedRoom' state */}
+      <select value={selectedRoom} onChange={(e) => setSelectedRoom(e.target.value)}>
+        
+        {/* Correct way to handle empty state in a select */}
+        {rooms.length === 0 && <option disabled>No rooms available</option>}
+
         {rooms.map((room) => (
-          <button key={room._id} onClick={() => handleJoinRoom(room.roomName)}>
+          <option key={room._id} value={room.roomName}>
             {room.roomName}
-          </button>
+          </option>
         ))}
-      </div>
+      </select>
+
+      {/* THE FIX: 
+        We pass the handleJoinClick function itself.
+        This function will be executed ONLY when the user clicks the button.
+      */}
+      <button onClick={handleJoinClick} disabled={!selectedRoom}>
+        Join Room
+      </button>
+    </div>
       <hr />
       <h3>Or Create a New Room</h3>
       <form onSubmit={handleCreateRoom}>
