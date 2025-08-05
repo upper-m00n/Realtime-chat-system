@@ -1,9 +1,11 @@
 import React from 'react';
-import './ChatHeader.css'; // Create this new CSS file
+import './ChatHeader.css';
+import { useNavigate } from 'react-router-dom';
 
 const ChatHeader = ({ room, onlineCount }) => {
-  const handleDisplayUser=()=>{
-    
+  const navigate=useNavigate();
+  const handleExitRoom =()=>{
+    navigate('/')
   }
 
   return (
@@ -11,7 +13,10 @@ const ChatHeader = ({ room, onlineCount }) => {
       <img src="https://via.placeholder.com/40" alt="group-icon" className="group-icon" />
       <div className="header-info">
         <h3 className="room-name">{room}</h3>
-        <span className="online-status" onClick={handleDisplayUser}>{onlineCount} users online</span>
+        <div>
+          <span className="online-status"> {onlineCount} users online</span>
+         <button onClick={handleExitRoom}>Exit Room</button>
+        </div>
       </div>
     </div>
   );

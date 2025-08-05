@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 
-const API_URL = 'http://localhost:5000'; // Or your deployed backend URL
+const API_URL = 'http://localhost:5000'; // backend url
 
 function Login({ onLoginSuccess }) {
   const [username, setUsername] = useState('');
@@ -13,19 +13,32 @@ function Login({ onLoginSuccess }) {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      
       const response = await axios.post(`${API_URL}/api/auth/login`, { username, password });
-      onLoginSuccess(response.data.user); // Pass user data up to App.js
-      navigate('/'); // Navigate to the Lobby on successful login
+      onLoginSuccess(response.data.user); 
+      navigate('/'); 
     } catch (err) {
       setError(err.response?.data?.msg || 'Login failed.');
     }
+  };
+
+  // guest mode
+  const handleGuestLogin = () => {
+    // Generate guest username 
+    const randomId = Math.floor(Math.random() * 10000);
+    const guestUser = {
+      username: `Guest${randomId}`,
+      id: `guest_${randomId}` 
+    };
+    onLoginSuccess(guestUser);
+    navigate('/');
   };
 
   return (
     <div className="login-container">
       <form onSubmit={handleLogin}>
         <h1>Login</h1>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {error && <p className="error-message">{error}</p>}
         <input
           type="text"
           placeholder="Enter your username"
@@ -41,10 +54,17 @@ function Login({ onLoginSuccess }) {
           required
         />
         <button type="submit">Login</button>
-         <p style={{textAlign: 'center', marginTop: '1rem'}}>
+        <p className="form-link">
             Don't have an account? <Link to="/register">Register</Link>
         </p>
       </form>
+
+      <div className="guest-mode-separator">
+        <span>or</span>
+      </div>
+      <button type="button" className="guest-button" onClick={handleGuestLogin}>
+        Continue as Guest
+      </button>
     </div>
   );
 }

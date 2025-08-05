@@ -13,7 +13,7 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${API_URL}/api/register`, { username, password });
+      await axios.post(`${API_URL}/api/auth/register`, { username, password });
       navigate('/login'); // Redirect to login page on successful registration
     } catch (err) {
       setError(err.response?.data?.msg || 'Registration failed.');

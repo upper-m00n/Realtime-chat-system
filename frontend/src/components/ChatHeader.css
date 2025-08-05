@@ -16,6 +16,21 @@
   display: flex;
   flex-direction: column;
 }
+.header-info button{
+  padding: 10px;
+  background-color: black;
+  color: beige;
+  border-radius: 10px;
+  transition: 1s;
+  border-width: 0;
+  margin-left: 10px;
+  
+}
+
+.header-info button:hover{
+  background-color: gray;
+  transition:1s;
+}
 
 .room-name {
   margin: 0;
