@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 
-const API_URL = 'http://localhost:5000'; // backend URL
+const API_URL = 'https://realtime-chat-system-nkxh.onrender.com'; // backend URL
 
 function Register() {
   const [username, setUsername] = useState('');

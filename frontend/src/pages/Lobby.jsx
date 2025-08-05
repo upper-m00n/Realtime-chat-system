@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Lobby.css'; 
 
-const API_URL = 'http://localhost:5000'; //  backend URL
+const API_URL = 'https://realtime-chat-system-nkxh.onrender.com'; //  backend URL
 
 function Lobby({ user, onJoinRoom }) {
   const [rooms, setRooms] = useState([]);

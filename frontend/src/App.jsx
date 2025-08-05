@@ -8,7 +8,7 @@ import Register from './pages/Register';
 import Lobby from './pages/Lobby';
 import ChatPage from './pages/ChatPage';
 
-const API_URL = 'http://localhost:5000';
+const API_URL = 'https://realtime-chat-system-nkxh.onrender.com';
 const socket = io(API_URL);
 
 function App() {
