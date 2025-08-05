@@ -4,9 +4,10 @@ import ChatWindow from './components/ChatWindow';
 import MessageInput from './components/MessageInput';
 import OnlineUsersList from './components/OnlineUsersList';
 import './App.css'; // We'll add some basic styles here
+import TypingIndicator from './components/TypingIndicator';
 
 // Connect to the backend server
-const socket = io('YOUR_BACKEND_URL'); // e.g., http://localhost:5000 or your Vercel URL
+const socket = io('http://localhost:5000'); // e.g., http://localhost:5000 or your Vercel URL
 
 function App() {
   const [username, setUsername] = useState('');
