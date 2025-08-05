@@ -15,8 +15,8 @@ function ChatPage({ user, messages, onlineUsers, typingNotification, onSendMessa
                 <OnlineUsersList users={onlineUsers} room={roomName}/>
                 <ChatWindow messages={messages} username={user.username} />
                 <div className="chat-footer">
-                    <MessageInput onSendMessage={onSendMessage} onTyping={onTyping} />
                     <TypingIndicator notification={typingNotification} />
+                    <MessageInput onSendMessage={onSendMessage} onTyping={onTyping} />
                 </div>
             </div>
         </div>
