@@ -1,0 +1,124 @@
+/* src/pages/Lobby.css */
+
+.lobby-container {
+  background-color: #ffffff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 550px;
+  box-sizing: border-box;
+}
+
+.lobby-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.lobby-header h2 {
+  margin: 0 0 8px 0;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.lobby-header p {
+  margin: 0;
+  font-size: 1rem;
+  color: #666;
+}
+
+.join-room-section,
+.create-room-section {
+  margin-bottom: 20px;
+}
+
+.join-room-section h3,
+.create-room-section h3 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #333;
+  margin: 0 0 12px 0;
+  text-align: left;
+}
+
+/* This is the key for side-by-side inputs and buttons */
+.input-group {
+  display: flex;
+  gap: 12px; /* Space between items */
+}
+
+/* Unified style for select and input */
+.lobby-container select,
+.lobby-container input[type="text"] {
+  flex-grow: 1; /* Allows the element to take up available space */
+  padding: 14px 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.lobby-container select:focus,
+.lobby-container input[type="text"]:focus {
+  outline: none;
+  border-color: #075E54;
+  box-shadow: 0 0 0 3px rgba(7, 94, 84, 0.1);
+}
+
+/* Unified button style */
+.lobby-container button {
+  padding: 14px 24px;
+  border: none;
+  border-radius: 8px;
+  background-color: #128C7E;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap; /* Prevents text like "Join Room" from wrapping */
+  transition: background-color 0.3s, transform 0.1s;
+}
+
+.lobby-container button:hover {
+  background-color: #075E54;
+}
+
+.lobby-container button:active {
+    transform: scale(0.98);
+}
+
+.lobby-container button:disabled {
+  background-color: #a9a9a9;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Styled divider instead of <hr> */
+.divider {
+  height: 1px;
+  width: 100%;
+  background-color: #e0e0e0;
+  margin: 35px 0;
+}
+
+/* Feedback message styles */
+.message {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.message.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
